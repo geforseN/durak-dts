@@ -24,6 +24,10 @@
   },
   "homepage": "https://github.com/geforseN/durak-dts#readme",
   "devDependencies": {
+    "@types/socket.io": "^3.0.2",
     "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.2.0"
   }
 }
