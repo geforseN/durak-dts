@@ -1,6 +1,6 @@
 {
   "name": "@durak-game/durak-dts",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Durak Game TypeScript types for Node.js server and JavaScript client ",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/geforseN/durak-dts.git"
   },
+  "types": "index.d.ts",
   "keywords": [
     "ts",
     "typescript",
