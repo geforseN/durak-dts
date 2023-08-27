@@ -1,5 +1,12 @@
 // TODO read https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry
 
+export type NotificationAlert = {
+  message: string;
+  type: "Error" | "Warning" | "Success";
+  durationInMS: number;
+  id: string;
+};
+
 export type PlayerInfo = {
   id: string;
   isAdmin: boolean;
