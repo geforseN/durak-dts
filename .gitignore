@@ -4,3 +4,5 @@ dist
 .idea
 static
 .vscode
+generated/client/*
+!generated/client/index.d.ts
