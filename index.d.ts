@@ -59,7 +59,22 @@ export type CardCount = 24 | 36 | 52;
 export type UserCount = 2 | 3 | 4 | 5 | 6;
 export type AllowedMissingCardCount = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
-export type DeskSlot = {};
+export type DeskSlot = { attackCard?: Card; defendCard?: Card };
+
+export type GameSettings = {
+  userCount: UserCount;
+  gameType: GameType;
+  cardCount: CardCount;
+  moveTime: number;
+  initialDistribution: {
+    finalCardCount: AllowedMissingCardCount;
+    cardCountPerIteration: AllowedMissingCardCount;
+  };
+  desk: {
+    allowedFilledSlotCount: AllowedMissingCardCount;
+    slotCount: AllowedMissingCardCount;
+  };
+};
 
 export type GameState = {
   self: Self;
@@ -83,20 +98,7 @@ export type GameState = {
   desk: {
     slots: DeskSlot[];
   };
-  settings: {
-    userCount: UserCount;
-    gameType: GameType;
-    cardCount: CardCount;
-    moveTime: number;
-    initialDistribution: {
-      finalCardCount: AllowedMissingCardCount;
-      cardCountPerIteration: AllowedMissingCardCount;
-    };
-    desk: {
-      allowedFilledSlotCount: AllowedMissingCardCount;
-      slotCount: AllowedMissingCardCount;
-    };
-  };
+  settings: GameSettings;
   talon: {
     trumpCard: Card;
     isEmpty: boolean;
