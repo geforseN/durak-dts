@@ -1,3 +1,5 @@
+// TODO read https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry
+
 export type PlayerInfo = {
   id: string;
   isAdmin: boolean;
