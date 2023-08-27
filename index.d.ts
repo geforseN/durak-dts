@@ -1,5 +1,7 @@
 // TODO read https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry
 
+export { DurakGameSocket } from './durak-game-socket'
+
 export type NotificationAlert = {
   message: string;
   type: "Error" | "Warning" | "Success";
