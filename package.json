@@ -1,6 +1,6 @@
 {
   "name": "@durak-game/durak-dts",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Durak Game TypeScript types for Node.js server and JavaScript client ",
   "main": "index.js",
   "scripts": {
