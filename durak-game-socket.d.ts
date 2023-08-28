@@ -48,7 +48,7 @@ export namespace DurakGameSocket {
   type DeskServerToClientEvents = {
     "desk::becameClear": () => void;
     "desk::receivedCard": (payload: {
-      card: C;
+      card: Card;
       slot: { index: number };
       source: { id: Player["id"] };
     }) => void;
@@ -57,12 +57,12 @@ export namespace DurakGameSocket {
   type DiscardServerToClientEvents = {
     "discard::receivedCards": (payload: {
       addedCardsCount: number;
+      isReceivedFirstCards: boolean;
       // NOTE: it is not best idea to emit count of discard cards
       // discard cards count can be used for cheating
       // user always can inject JavaScript code
       totalCardsCount?: number;
     }) => void;
-    "discard::becameFilled": () => void;
   };
 
   type MoveServerToClientEvents = {

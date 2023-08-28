@@ -46,7 +46,7 @@ export type PlayerInfo = {
 
 export type PlayerKind = "Defender" | "Attacker" | "Player";
 
-type BasePlayer = {
+export type BasePlayer = {
   info: PlayerInfo;
   kind: PlayerKind;
   id: string;
