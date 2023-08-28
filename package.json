@@ -5,7 +5,10 @@
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "patch": "npm version patch && push",
+    "minor": "npm version minor && push",
+    "push": "git push && npm publish"
   },
   "repository": {
     "type": "git",
