@@ -352,7 +352,7 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 5.1.1
+   * Prisma Client JS version: 5.2.0
    * Query Engine version: 6a3747c37ff169c90047725a05a6ef02e32ac97e
    */
   export type PrismaVersion = {
@@ -1289,6 +1289,11 @@ export namespace Prisma {
     datasources?: Datasources
 
     /**
+     * Overwrites the datasource url from your schema.prisma file
+     */
+    datasourceUrl?: string
+
+    /**
      * @default "colorless"
      */
     errorFormat?: ErrorFormat
@@ -1460,6 +1465,40 @@ export namespace Prisma {
    * UserCountOutputType without action
    */
   export type UserCountOutputTypeCountUserGamePlayerArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    where?: UserGamePlayerWhereInput
+  }
+
+
+
+  /**
+   * Count Type UserGameStatCountOutputType
+   */
+
+  export type UserGameStatCountOutputType = {
+    UserGamePlayer: number
+  }
+
+  export type UserGameStatCountOutputTypeSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    UserGamePlayer?: boolean | UserGameStatCountOutputTypeCountUserGamePlayerArgs
+  }
+
+  // Custom InputTypes
+
+  /**
+   * UserGameStatCountOutputType without action
+   */
+  export type UserGameStatCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserGameStatCountOutputType
+     */
+    select?: UserGameStatCountOutputTypeSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * UserGameStatCountOutputType without action
+   */
+  export type UserGameStatCountOutputTypeCountUserGamePlayerArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     where?: UserGamePlayerWhereInput
   }
 
@@ -5379,15 +5418,15 @@ export namespace Prisma {
   export type UserGamePlayerAvgAggregateOutputType = {
     durakGameNumber: number | null
     index: number | null
-    winPlace: number | null
-    winRoundNumber: number | null
+    place: number | null
+    roundLeftNumber: number | null
   }
 
   export type UserGamePlayerSumAggregateOutputType = {
     durakGameNumber: number | null
     index: number | null
-    winPlace: number | null
-    winRoundNumber: number | null
+    place: number | null
+    roundLeftNumber: number | null
   }
 
   export type UserGamePlayerMinAggregateOutputType = {
@@ -5395,8 +5434,8 @@ export namespace Prisma {
     userId: string | null
     index: number | null
     result: $Enums.GameEndResult | null
-    winPlace: number | null
-    winRoundNumber: number | null
+    place: number | null
+    roundLeftNumber: number | null
     hasLost: boolean | null
   }
 
@@ -5405,8 +5444,8 @@ export namespace Prisma {
     userId: string | null
     index: number | null
     result: $Enums.GameEndResult | null
-    winPlace: number | null
-    winRoundNumber: number | null
+    place: number | null
+    roundLeftNumber: number | null
     hasLost: boolean | null
   }
 
@@ -5415,8 +5454,8 @@ export namespace Prisma {
     userId: number
     index: number
     result: number
-    winPlace: number
-    winRoundNumber: number
+    place: number
+    roundLeftNumber: number
     hasLost: number
     _all: number
   }
@@ -5425,15 +5464,15 @@ export namespace Prisma {
   export type UserGamePlayerAvgAggregateInputType = {
     durakGameNumber?: true
     index?: true
-    winPlace?: true
-    winRoundNumber?: true
+    place?: true
+    roundLeftNumber?: true
   }
 
   export type UserGamePlayerSumAggregateInputType = {
     durakGameNumber?: true
     index?: true
-    winPlace?: true
-    winRoundNumber?: true
+    place?: true
+    roundLeftNumber?: true
   }
 
   export type UserGamePlayerMinAggregateInputType = {
@@ -5441,8 +5480,8 @@ export namespace Prisma {
     userId?: true
     index?: true
     result?: true
-    winPlace?: true
-    winRoundNumber?: true
+    place?: true
+    roundLeftNumber?: true
     hasLost?: true
   }
 
@@ -5451,8 +5490,8 @@ export namespace Prisma {
     userId?: true
     index?: true
     result?: true
-    winPlace?: true
-    winRoundNumber?: true
+    place?: true
+    roundLeftNumber?: true
     hasLost?: true
   }
 
@@ -5461,8 +5500,8 @@ export namespace Prisma {
     userId?: true
     index?: true
     result?: true
-    winPlace?: true
-    winRoundNumber?: true
+    place?: true
+    roundLeftNumber?: true
     hasLost?: true
     _all?: true
   }
@@ -5558,8 +5597,8 @@ export namespace Prisma {
     userId: string
     index: number
     result: $Enums.GameEndResult
-    winPlace: number | null
-    winRoundNumber: number | null
+    place: number
+    roundLeftNumber: number
     hasLost: boolean
     _count: UserGamePlayerCountAggregateOutputType | null
     _avg: UserGamePlayerAvgAggregateOutputType | null
@@ -5587,11 +5626,12 @@ export namespace Prisma {
     userId?: boolean
     index?: boolean
     result?: boolean
-    winPlace?: boolean
-    winRoundNumber?: boolean
+    place?: boolean
+    roundLeftNumber?: boolean
     hasLost?: boolean
     DurakGame?: boolean | DurakGameDefaultArgs<ExtArgs>
     User?: boolean | UserDefaultArgs<ExtArgs>
+    stat?: boolean | UserGameStatDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userGamePlayer"]>
 
   export type UserGamePlayerSelectScalar = {
@@ -5599,14 +5639,15 @@ export namespace Prisma {
     userId?: boolean
     index?: boolean
     result?: boolean
-    winPlace?: boolean
-    winRoundNumber?: boolean
+    place?: boolean
+    roundLeftNumber?: boolean
     hasLost?: boolean
   }
 
   export type UserGamePlayerInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     DurakGame?: boolean | DurakGameDefaultArgs<ExtArgs>
     User?: boolean | UserDefaultArgs<ExtArgs>
+    stat?: boolean | UserGameStatDefaultArgs<ExtArgs>
   }
 
 
@@ -5615,14 +5656,15 @@ export namespace Prisma {
     objects: {
       DurakGame: Prisma.$DurakGamePayload<ExtArgs>
       User: Prisma.$UserPayload<ExtArgs>
+      stat: Prisma.$UserGameStatPayload<ExtArgs>
     }
     scalars: $Extensions.GetResult<{
       durakGameNumber: number
       userId: string
       index: number
       result: $Enums.GameEndResult
-      winPlace: number | null
-      winRoundNumber: number | null
+      place: number
+      roundLeftNumber: number
       hasLost: boolean
     }, ExtArgs["result"]["userGamePlayer"]>
     composites: {}
@@ -5993,6 +6035,8 @@ export namespace Prisma {
 
     User<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
+    stat<T extends UserGameStatDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserGameStatDefaultArgs<ExtArgs>>): Prisma__UserGameStatClient<$Result.GetResult<Prisma.$UserGameStatPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6025,8 +6069,8 @@ export namespace Prisma {
     readonly userId: FieldRef<"UserGamePlayer", 'String'>
     readonly index: FieldRef<"UserGamePlayer", 'Int'>
     readonly result: FieldRef<"UserGamePlayer", 'GameEndResult'>
-    readonly winPlace: FieldRef<"UserGamePlayer", 'Int'>
-    readonly winRoundNumber: FieldRef<"UserGamePlayer", 'Int'>
+    readonly place: FieldRef<"UserGamePlayer", 'Int'>
+    readonly roundLeftNumber: FieldRef<"UserGamePlayer", 'Int'>
     readonly hasLost: FieldRef<"UserGamePlayer", 'Boolean'>
   }
     
@@ -6562,6 +6606,8 @@ export namespace Prisma {
     unstableGamesCount?: boolean
     createdAt?: boolean
     User?: boolean | UserDefaultArgs<ExtArgs>
+    UserGamePlayer?: boolean | UserGameStat$UserGamePlayerArgs<ExtArgs>
+    _count?: boolean | UserGameStatCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userGameStat"]>
 
   export type UserGameStatSelectScalar = {
@@ -6574,6 +6620,8 @@ export namespace Prisma {
 
   export type UserGameStatInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     User?: boolean | UserDefaultArgs<ExtArgs>
+    UserGamePlayer?: boolean | UserGameStat$UserGamePlayerArgs<ExtArgs>
+    _count?: boolean | UserGameStatCountOutputTypeDefaultArgs<ExtArgs>
   }
 
 
@@ -6581,6 +6629,7 @@ export namespace Prisma {
     name: "UserGameStat"
     objects: {
       User: Prisma.$UserPayload<ExtArgs>
+      UserGamePlayer: Prisma.$UserGamePlayerPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetResult<{
       userId: string
@@ -6955,6 +7004,8 @@ export namespace Prisma {
 
     User<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
+    UserGamePlayer<T extends UserGameStat$UserGamePlayerArgs<ExtArgs> = {}>(args?: Subset<T, UserGameStat$UserGamePlayerArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserGamePlayerPayload<ExtArgs>, T, 'findMany'> | Null>;
+
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7296,6 +7347,27 @@ export namespace Prisma {
      * Filter which UserGameStats to delete
      */
     where?: UserGameStatWhereInput
+  }
+
+
+  /**
+   * UserGameStat.UserGamePlayer
+   */
+  export type UserGameStat$UserGamePlayerArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserGamePlayer
+     */
+    select?: UserGamePlayerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: UserGamePlayerInclude<ExtArgs> | null
+    where?: UserGamePlayerWhereInput
+    orderBy?: UserGamePlayerOrderByWithRelationInput | UserGamePlayerOrderByWithRelationInput[]
+    cursor?: UserGamePlayerWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserGamePlayerScalarFieldEnum | UserGamePlayerScalarFieldEnum[]
   }
 
 
@@ -8311,8 +8383,8 @@ export namespace Prisma {
     userId: 'userId',
     index: 'index',
     result: 'result',
-    winPlace: 'winPlace',
-    winRoundNumber: 'winRoundNumber',
+    place: 'place',
+    roundLeftNumber: 'roundLeftNumber',
     hasLost: 'hasLost'
   };
 
@@ -8753,11 +8825,12 @@ export namespace Prisma {
     userId?: StringFilter<"UserGamePlayer"> | string
     index?: IntFilter<"UserGamePlayer"> | number
     result?: EnumGameEndResultFilter<"UserGamePlayer"> | $Enums.GameEndResult
-    winPlace?: IntNullableFilter<"UserGamePlayer"> | number | null
-    winRoundNumber?: IntNullableFilter<"UserGamePlayer"> | number | null
+    place?: IntFilter<"UserGamePlayer"> | number
+    roundLeftNumber?: IntFilter<"UserGamePlayer"> | number
     hasLost?: BoolFilter<"UserGamePlayer"> | boolean
     DurakGame?: XOR<DurakGameRelationFilter, DurakGameWhereInput>
     User?: XOR<UserRelationFilter, UserWhereInput>
+    stat?: XOR<UserGameStatRelationFilter, UserGameStatWhereInput>
   }
 
   export type UserGamePlayerOrderByWithRelationInput = {
@@ -8765,11 +8838,12 @@ export namespace Prisma {
     userId?: SortOrder
     index?: SortOrder
     result?: SortOrder
-    winPlace?: SortOrderInput | SortOrder
-    winRoundNumber?: SortOrderInput | SortOrder
+    place?: SortOrder
+    roundLeftNumber?: SortOrder
     hasLost?: SortOrder
     DurakGame?: DurakGameOrderByWithRelationInput
     User?: UserOrderByWithRelationInput
+    stat?: UserGameStatOrderByWithRelationInput
   }
 
   export type UserGamePlayerWhereUniqueInput = Prisma.AtLeast<{
@@ -8781,11 +8855,12 @@ export namespace Prisma {
     userId?: StringFilter<"UserGamePlayer"> | string
     index?: IntFilter<"UserGamePlayer"> | number
     result?: EnumGameEndResultFilter<"UserGamePlayer"> | $Enums.GameEndResult
-    winPlace?: IntNullableFilter<"UserGamePlayer"> | number | null
-    winRoundNumber?: IntNullableFilter<"UserGamePlayer"> | number | null
+    place?: IntFilter<"UserGamePlayer"> | number
+    roundLeftNumber?: IntFilter<"UserGamePlayer"> | number
     hasLost?: BoolFilter<"UserGamePlayer"> | boolean
     DurakGame?: XOR<DurakGameRelationFilter, DurakGameWhereInput>
     User?: XOR<UserRelationFilter, UserWhereInput>
+    stat?: XOR<UserGameStatRelationFilter, UserGameStatWhereInput>
   }, "durakGameNumber_index">
 
   export type UserGamePlayerOrderByWithAggregationInput = {
@@ -8793,8 +8868,8 @@ export namespace Prisma {
     userId?: SortOrder
     index?: SortOrder
     result?: SortOrder
-    winPlace?: SortOrderInput | SortOrder
-    winRoundNumber?: SortOrderInput | SortOrder
+    place?: SortOrder
+    roundLeftNumber?: SortOrder
     hasLost?: SortOrder
     _count?: UserGamePlayerCountOrderByAggregateInput
     _avg?: UserGamePlayerAvgOrderByAggregateInput
@@ -8811,8 +8886,8 @@ export namespace Prisma {
     userId?: StringWithAggregatesFilter<"UserGamePlayer"> | string
     index?: IntWithAggregatesFilter<"UserGamePlayer"> | number
     result?: EnumGameEndResultWithAggregatesFilter<"UserGamePlayer"> | $Enums.GameEndResult
-    winPlace?: IntNullableWithAggregatesFilter<"UserGamePlayer"> | number | null
-    winRoundNumber?: IntNullableWithAggregatesFilter<"UserGamePlayer"> | number | null
+    place?: IntWithAggregatesFilter<"UserGamePlayer"> | number
+    roundLeftNumber?: IntWithAggregatesFilter<"UserGamePlayer"> | number
     hasLost?: BoolWithAggregatesFilter<"UserGamePlayer"> | boolean
   }
 
@@ -8826,6 +8901,7 @@ export namespace Prisma {
     unstableGamesCount?: IntFilter<"UserGameStat"> | number
     createdAt?: DateTimeFilter<"UserGameStat"> | Date | string
     User?: XOR<UserRelationFilter, UserWhereInput>
+    UserGamePlayer?: UserGamePlayerListRelationFilter
   }
 
   export type UserGameStatOrderByWithRelationInput = {
@@ -8835,6 +8911,7 @@ export namespace Prisma {
     unstableGamesCount?: SortOrder
     createdAt?: SortOrder
     User?: UserOrderByWithRelationInput
+    UserGamePlayer?: UserGamePlayerOrderByRelationAggregateInput
   }
 
   export type UserGameStatWhereUniqueInput = Prisma.AtLeast<{
@@ -8847,6 +8924,7 @@ export namespace Prisma {
     unstableGamesCount?: IntFilter<"UserGameStat"> | number
     createdAt?: DateTimeFilter<"UserGameStat"> | Date | string
     User?: XOR<UserRelationFilter, UserWhereInput>
+    UserGamePlayer?: UserGamePlayerListRelationFilter
   }, "userId" | "userId">
 
   export type UserGameStatOrderByWithAggregationInput = {
@@ -9203,11 +9281,12 @@ export namespace Prisma {
   export type UserGamePlayerCreateInput = {
     index: number
     result: $Enums.GameEndResult
-    winPlace?: number | null
-    winRoundNumber?: number | null
+    place: number
+    roundLeftNumber: number
     hasLost?: boolean
     DurakGame: DurakGameCreateNestedOneWithoutPlayersInput
     User: UserCreateNestedOneWithoutUserGamePlayerInput
+    stat: UserGameStatCreateNestedOneWithoutUserGamePlayerInput
   }
 
   export type UserGamePlayerUncheckedCreateInput = {
@@ -9215,19 +9294,20 @@ export namespace Prisma {
     userId: string
     index: number
     result: $Enums.GameEndResult
-    winPlace?: number | null
-    winRoundNumber?: number | null
+    place: number
+    roundLeftNumber: number
     hasLost?: boolean
   }
 
   export type UserGamePlayerUpdateInput = {
     index?: IntFieldUpdateOperationsInput | number
     result?: EnumGameEndResultFieldUpdateOperationsInput | $Enums.GameEndResult
-    winPlace?: NullableIntFieldUpdateOperationsInput | number | null
-    winRoundNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    place?: IntFieldUpdateOperationsInput | number
+    roundLeftNumber?: IntFieldUpdateOperationsInput | number
     hasLost?: BoolFieldUpdateOperationsInput | boolean
     DurakGame?: DurakGameUpdateOneRequiredWithoutPlayersNestedInput
     User?: UserUpdateOneRequiredWithoutUserGamePlayerNestedInput
+    stat?: UserGameStatUpdateOneRequiredWithoutUserGamePlayerNestedInput
   }
 
   export type UserGamePlayerUncheckedUpdateInput = {
@@ -9235,8 +9315,8 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     index?: IntFieldUpdateOperationsInput | number
     result?: EnumGameEndResultFieldUpdateOperationsInput | $Enums.GameEndResult
-    winPlace?: NullableIntFieldUpdateOperationsInput | number | null
-    winRoundNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    place?: IntFieldUpdateOperationsInput | number
+    roundLeftNumber?: IntFieldUpdateOperationsInput | number
     hasLost?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -9245,16 +9325,16 @@ export namespace Prisma {
     userId: string
     index: number
     result: $Enums.GameEndResult
-    winPlace?: number | null
-    winRoundNumber?: number | null
+    place: number
+    roundLeftNumber: number
     hasLost?: boolean
   }
 
   export type UserGamePlayerUpdateManyMutationInput = {
     index?: IntFieldUpdateOperationsInput | number
     result?: EnumGameEndResultFieldUpdateOperationsInput | $Enums.GameEndResult
-    winPlace?: NullableIntFieldUpdateOperationsInput | number | null
-    winRoundNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    place?: IntFieldUpdateOperationsInput | number
+    roundLeftNumber?: IntFieldUpdateOperationsInput | number
     hasLost?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -9263,8 +9343,8 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     index?: IntFieldUpdateOperationsInput | number
     result?: EnumGameEndResultFieldUpdateOperationsInput | $Enums.GameEndResult
-    winPlace?: NullableIntFieldUpdateOperationsInput | number | null
-    winRoundNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    place?: IntFieldUpdateOperationsInput | number
+    roundLeftNumber?: IntFieldUpdateOperationsInput | number
     hasLost?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -9274,6 +9354,7 @@ export namespace Prisma {
     unstableGamesCount?: number
     createdAt?: Date | string
     User: UserCreateNestedOneWithoutUserGameStatInput
+    UserGamePlayer?: UserGamePlayerCreateNestedManyWithoutStatInput
   }
 
   export type UserGameStatUncheckedCreateInput = {
@@ -9282,6 +9363,7 @@ export namespace Prisma {
     lostGamesCount?: number
     unstableGamesCount?: number
     createdAt?: Date | string
+    UserGamePlayer?: UserGamePlayerUncheckedCreateNestedManyWithoutStatInput
   }
 
   export type UserGameStatUpdateInput = {
@@ -9290,6 +9372,7 @@ export namespace Prisma {
     unstableGamesCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     User?: UserUpdateOneRequiredWithoutUserGameStatNestedInput
+    UserGamePlayer?: UserGamePlayerUpdateManyWithoutStatNestedInput
   }
 
   export type UserGameStatUncheckedUpdateInput = {
@@ -9298,6 +9381,7 @@ export namespace Prisma {
     lostGamesCount?: IntFieldUpdateOperationsInput | number
     unstableGamesCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UserGamePlayer?: UserGamePlayerUncheckedUpdateManyWithoutStatNestedInput
   }
 
   export type UserGameStatCreateManyInput = {
@@ -9783,6 +9867,11 @@ export namespace Prisma {
     isNot?: DurakGameWhereInput
   }
 
+  export type UserGameStatRelationFilter = {
+    is?: UserGameStatWhereInput
+    isNot?: UserGameStatWhereInput
+  }
+
   export type UserGamePlayerDurakGameNumberIndexCompoundUniqueInput = {
     durakGameNumber: number
     index: number
@@ -9793,16 +9882,16 @@ export namespace Prisma {
     userId?: SortOrder
     index?: SortOrder
     result?: SortOrder
-    winPlace?: SortOrder
-    winRoundNumber?: SortOrder
+    place?: SortOrder
+    roundLeftNumber?: SortOrder
     hasLost?: SortOrder
   }
 
   export type UserGamePlayerAvgOrderByAggregateInput = {
     durakGameNumber?: SortOrder
     index?: SortOrder
-    winPlace?: SortOrder
-    winRoundNumber?: SortOrder
+    place?: SortOrder
+    roundLeftNumber?: SortOrder
   }
 
   export type UserGamePlayerMaxOrderByAggregateInput = {
@@ -9810,8 +9899,8 @@ export namespace Prisma {
     userId?: SortOrder
     index?: SortOrder
     result?: SortOrder
-    winPlace?: SortOrder
-    winRoundNumber?: SortOrder
+    place?: SortOrder
+    roundLeftNumber?: SortOrder
     hasLost?: SortOrder
   }
 
@@ -9820,16 +9909,16 @@ export namespace Prisma {
     userId?: SortOrder
     index?: SortOrder
     result?: SortOrder
-    winPlace?: SortOrder
-    winRoundNumber?: SortOrder
+    place?: SortOrder
+    roundLeftNumber?: SortOrder
     hasLost?: SortOrder
   }
 
   export type UserGamePlayerSumOrderByAggregateInput = {
     durakGameNumber?: SortOrder
     index?: SortOrder
-    winPlace?: SortOrder
-    winRoundNumber?: SortOrder
+    place?: SortOrder
+    roundLeftNumber?: SortOrder
   }
 
   export type EnumGameEndResultWithAggregatesFilter<$PrismaModel = never> = {
@@ -10180,6 +10269,12 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type UserGameStatCreateNestedOneWithoutUserGamePlayerInput = {
+    create?: XOR<UserGameStatCreateWithoutUserGamePlayerInput, UserGameStatUncheckedCreateWithoutUserGamePlayerInput>
+    connectOrCreate?: UserGameStatCreateOrConnectWithoutUserGamePlayerInput
+    connect?: UserGameStatWhereUniqueInput
+  }
+
   export type EnumGameEndResultFieldUpdateOperationsInput = {
     set?: $Enums.GameEndResult
   }
@@ -10204,10 +10299,32 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUserGamePlayerInput, UserUpdateWithoutUserGamePlayerInput>, UserUncheckedUpdateWithoutUserGamePlayerInput>
   }
 
+  export type UserGameStatUpdateOneRequiredWithoutUserGamePlayerNestedInput = {
+    create?: XOR<UserGameStatCreateWithoutUserGamePlayerInput, UserGameStatUncheckedCreateWithoutUserGamePlayerInput>
+    connectOrCreate?: UserGameStatCreateOrConnectWithoutUserGamePlayerInput
+    upsert?: UserGameStatUpsertWithoutUserGamePlayerInput
+    connect?: UserGameStatWhereUniqueInput
+    update?: XOR<XOR<UserGameStatUpdateToOneWithWhereWithoutUserGamePlayerInput, UserGameStatUpdateWithoutUserGamePlayerInput>, UserGameStatUncheckedUpdateWithoutUserGamePlayerInput>
+  }
+
   export type UserCreateNestedOneWithoutUserGameStatInput = {
     create?: XOR<UserCreateWithoutUserGameStatInput, UserUncheckedCreateWithoutUserGameStatInput>
     connectOrCreate?: UserCreateOrConnectWithoutUserGameStatInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type UserGamePlayerCreateNestedManyWithoutStatInput = {
+    create?: XOR<UserGamePlayerCreateWithoutStatInput, UserGamePlayerUncheckedCreateWithoutStatInput> | UserGamePlayerCreateWithoutStatInput[] | UserGamePlayerUncheckedCreateWithoutStatInput[]
+    connectOrCreate?: UserGamePlayerCreateOrConnectWithoutStatInput | UserGamePlayerCreateOrConnectWithoutStatInput[]
+    createMany?: UserGamePlayerCreateManyStatInputEnvelope
+    connect?: UserGamePlayerWhereUniqueInput | UserGamePlayerWhereUniqueInput[]
+  }
+
+  export type UserGamePlayerUncheckedCreateNestedManyWithoutStatInput = {
+    create?: XOR<UserGamePlayerCreateWithoutStatInput, UserGamePlayerUncheckedCreateWithoutStatInput> | UserGamePlayerCreateWithoutStatInput[] | UserGamePlayerUncheckedCreateWithoutStatInput[]
+    connectOrCreate?: UserGamePlayerCreateOrConnectWithoutStatInput | UserGamePlayerCreateOrConnectWithoutStatInput[]
+    createMany?: UserGamePlayerCreateManyStatInputEnvelope
+    connect?: UserGamePlayerWhereUniqueInput | UserGamePlayerWhereUniqueInput[]
   }
 
   export type UserUpdateOneRequiredWithoutUserGameStatNestedInput = {
@@ -10216,6 +10333,34 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutUserGameStatInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUserGameStatInput, UserUpdateWithoutUserGameStatInput>, UserUncheckedUpdateWithoutUserGameStatInput>
+  }
+
+  export type UserGamePlayerUpdateManyWithoutStatNestedInput = {
+    create?: XOR<UserGamePlayerCreateWithoutStatInput, UserGamePlayerUncheckedCreateWithoutStatInput> | UserGamePlayerCreateWithoutStatInput[] | UserGamePlayerUncheckedCreateWithoutStatInput[]
+    connectOrCreate?: UserGamePlayerCreateOrConnectWithoutStatInput | UserGamePlayerCreateOrConnectWithoutStatInput[]
+    upsert?: UserGamePlayerUpsertWithWhereUniqueWithoutStatInput | UserGamePlayerUpsertWithWhereUniqueWithoutStatInput[]
+    createMany?: UserGamePlayerCreateManyStatInputEnvelope
+    set?: UserGamePlayerWhereUniqueInput | UserGamePlayerWhereUniqueInput[]
+    disconnect?: UserGamePlayerWhereUniqueInput | UserGamePlayerWhereUniqueInput[]
+    delete?: UserGamePlayerWhereUniqueInput | UserGamePlayerWhereUniqueInput[]
+    connect?: UserGamePlayerWhereUniqueInput | UserGamePlayerWhereUniqueInput[]
+    update?: UserGamePlayerUpdateWithWhereUniqueWithoutStatInput | UserGamePlayerUpdateWithWhereUniqueWithoutStatInput[]
+    updateMany?: UserGamePlayerUpdateManyWithWhereWithoutStatInput | UserGamePlayerUpdateManyWithWhereWithoutStatInput[]
+    deleteMany?: UserGamePlayerScalarWhereInput | UserGamePlayerScalarWhereInput[]
+  }
+
+  export type UserGamePlayerUncheckedUpdateManyWithoutStatNestedInput = {
+    create?: XOR<UserGamePlayerCreateWithoutStatInput, UserGamePlayerUncheckedCreateWithoutStatInput> | UserGamePlayerCreateWithoutStatInput[] | UserGamePlayerUncheckedCreateWithoutStatInput[]
+    connectOrCreate?: UserGamePlayerCreateOrConnectWithoutStatInput | UserGamePlayerCreateOrConnectWithoutStatInput[]
+    upsert?: UserGamePlayerUpsertWithWhereUniqueWithoutStatInput | UserGamePlayerUpsertWithWhereUniqueWithoutStatInput[]
+    createMany?: UserGamePlayerCreateManyStatInputEnvelope
+    set?: UserGamePlayerWhereUniqueInput | UserGamePlayerWhereUniqueInput[]
+    disconnect?: UserGamePlayerWhereUniqueInput | UserGamePlayerWhereUniqueInput[]
+    delete?: UserGamePlayerWhereUniqueInput | UserGamePlayerWhereUniqueInput[]
+    connect?: UserGamePlayerWhereUniqueInput | UserGamePlayerWhereUniqueInput[]
+    update?: UserGamePlayerUpdateWithWhereUniqueWithoutStatInput | UserGamePlayerUpdateWithWhereUniqueWithoutStatInput[]
+    updateMany?: UserGamePlayerUpdateManyWithWhereWithoutStatInput | UserGamePlayerUpdateManyWithWhereWithoutStatInput[]
+    deleteMany?: UserGamePlayerScalarWhereInput | UserGamePlayerScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutUserProfileInput = {
@@ -10499,18 +10644,19 @@ export namespace Prisma {
   export type UserGamePlayerCreateWithoutDurakGameInput = {
     index: number
     result: $Enums.GameEndResult
-    winPlace?: number | null
-    winRoundNumber?: number | null
+    place: number
+    roundLeftNumber: number
     hasLost?: boolean
     User: UserCreateNestedOneWithoutUserGamePlayerInput
+    stat: UserGameStatCreateNestedOneWithoutUserGamePlayerInput
   }
 
   export type UserGamePlayerUncheckedCreateWithoutDurakGameInput = {
     userId: string
     index: number
     result: $Enums.GameEndResult
-    winPlace?: number | null
-    winRoundNumber?: number | null
+    place: number
+    roundLeftNumber: number
     hasLost?: boolean
   }
 
@@ -10548,8 +10694,8 @@ export namespace Prisma {
     userId?: StringFilter<"UserGamePlayer"> | string
     index?: IntFilter<"UserGamePlayer"> | number
     result?: EnumGameEndResultFilter<"UserGamePlayer"> | $Enums.GameEndResult
-    winPlace?: IntNullableFilter<"UserGamePlayer"> | number | null
-    winRoundNumber?: IntNullableFilter<"UserGamePlayer"> | number | null
+    place?: IntFilter<"UserGamePlayer"> | number
+    roundLeftNumber?: IntFilter<"UserGamePlayer"> | number
     hasLost?: BoolFilter<"UserGamePlayer"> | boolean
   }
 
@@ -10577,18 +10723,19 @@ export namespace Prisma {
   export type UserGamePlayerCreateWithoutUserInput = {
     index: number
     result: $Enums.GameEndResult
-    winPlace?: number | null
-    winRoundNumber?: number | null
+    place: number
+    roundLeftNumber: number
     hasLost?: boolean
     DurakGame: DurakGameCreateNestedOneWithoutPlayersInput
+    stat: UserGameStatCreateNestedOneWithoutUserGamePlayerInput
   }
 
   export type UserGamePlayerUncheckedCreateWithoutUserInput = {
     durakGameNumber: number
     index: number
     result: $Enums.GameEndResult
-    winPlace?: number | null
-    winRoundNumber?: number | null
+    place: number
+    roundLeftNumber: number
     hasLost?: boolean
   }
 
@@ -10607,6 +10754,7 @@ export namespace Prisma {
     lostGamesCount?: number
     unstableGamesCount?: number
     createdAt?: Date | string
+    UserGamePlayer?: UserGamePlayerCreateNestedManyWithoutStatInput
   }
 
   export type UserGameStatUncheckedCreateWithoutUserInput = {
@@ -10614,6 +10762,7 @@ export namespace Prisma {
     lostGamesCount?: number
     unstableGamesCount?: number
     createdAt?: Date | string
+    UserGamePlayer?: UserGamePlayerUncheckedCreateNestedManyWithoutStatInput
   }
 
   export type UserGameStatCreateOrConnectWithoutUserInput = {
@@ -10701,6 +10850,7 @@ export namespace Prisma {
     lostGamesCount?: IntFieldUpdateOperationsInput | number
     unstableGamesCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UserGamePlayer?: UserGamePlayerUpdateManyWithoutStatNestedInput
   }
 
   export type UserGameStatUncheckedUpdateWithoutUserInput = {
@@ -10708,6 +10858,7 @@ export namespace Prisma {
     lostGamesCount?: IntFieldUpdateOperationsInput | number
     unstableGamesCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    UserGamePlayer?: UserGamePlayerUncheckedUpdateManyWithoutStatNestedInput
   }
 
   export type UserProfileUpsertWithoutUserInput = {
@@ -10856,6 +11007,27 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutUserGamePlayerInput, UserUncheckedCreateWithoutUserGamePlayerInput>
   }
 
+  export type UserGameStatCreateWithoutUserGamePlayerInput = {
+    wonGamesCount?: number
+    lostGamesCount?: number
+    unstableGamesCount?: number
+    createdAt?: Date | string
+    User: UserCreateNestedOneWithoutUserGameStatInput
+  }
+
+  export type UserGameStatUncheckedCreateWithoutUserGamePlayerInput = {
+    userId: string
+    wonGamesCount?: number
+    lostGamesCount?: number
+    unstableGamesCount?: number
+    createdAt?: Date | string
+  }
+
+  export type UserGameStatCreateOrConnectWithoutUserGamePlayerInput = {
+    where: UserGameStatWhereUniqueInput
+    create: XOR<UserGameStatCreateWithoutUserGamePlayerInput, UserGameStatUncheckedCreateWithoutUserGamePlayerInput>
+  }
+
   export type DurakGameUpsertWithoutPlayersInput = {
     update: XOR<DurakGameUpdateWithoutPlayersInput, DurakGameUncheckedUpdateWithoutPlayersInput>
     create: XOR<DurakGameCreateWithoutPlayersInput, DurakGameUncheckedCreateWithoutPlayersInput>
@@ -10922,6 +11094,33 @@ export namespace Prisma {
     UserProfile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
   }
 
+  export type UserGameStatUpsertWithoutUserGamePlayerInput = {
+    update: XOR<UserGameStatUpdateWithoutUserGamePlayerInput, UserGameStatUncheckedUpdateWithoutUserGamePlayerInput>
+    create: XOR<UserGameStatCreateWithoutUserGamePlayerInput, UserGameStatUncheckedCreateWithoutUserGamePlayerInput>
+    where?: UserGameStatWhereInput
+  }
+
+  export type UserGameStatUpdateToOneWithWhereWithoutUserGamePlayerInput = {
+    where?: UserGameStatWhereInput
+    data: XOR<UserGameStatUpdateWithoutUserGamePlayerInput, UserGameStatUncheckedUpdateWithoutUserGamePlayerInput>
+  }
+
+  export type UserGameStatUpdateWithoutUserGamePlayerInput = {
+    wonGamesCount?: IntFieldUpdateOperationsInput | number
+    lostGamesCount?: IntFieldUpdateOperationsInput | number
+    unstableGamesCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    User?: UserUpdateOneRequiredWithoutUserGameStatNestedInput
+  }
+
+  export type UserGameStatUncheckedUpdateWithoutUserGamePlayerInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    wonGamesCount?: IntFieldUpdateOperationsInput | number
+    lostGamesCount?: IntFieldUpdateOperationsInput | number
+    unstableGamesCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateWithoutUserGameStatInput = {
     num?: number
     id?: string
@@ -10949,6 +11148,35 @@ export namespace Prisma {
   export type UserCreateOrConnectWithoutUserGameStatInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutUserGameStatInput, UserUncheckedCreateWithoutUserGameStatInput>
+  }
+
+  export type UserGamePlayerCreateWithoutStatInput = {
+    index: number
+    result: $Enums.GameEndResult
+    place: number
+    roundLeftNumber: number
+    hasLost?: boolean
+    DurakGame: DurakGameCreateNestedOneWithoutPlayersInput
+    User: UserCreateNestedOneWithoutUserGamePlayerInput
+  }
+
+  export type UserGamePlayerUncheckedCreateWithoutStatInput = {
+    durakGameNumber: number
+    index: number
+    result: $Enums.GameEndResult
+    place: number
+    roundLeftNumber: number
+    hasLost?: boolean
+  }
+
+  export type UserGamePlayerCreateOrConnectWithoutStatInput = {
+    where: UserGamePlayerWhereUniqueInput
+    create: XOR<UserGamePlayerCreateWithoutStatInput, UserGamePlayerUncheckedCreateWithoutStatInput>
+  }
+
+  export type UserGamePlayerCreateManyStatInputEnvelope = {
+    data: UserGamePlayerCreateManyStatInput | UserGamePlayerCreateManyStatInput[]
+    skipDuplicates?: boolean
   }
 
   export type UserUpsertWithoutUserGameStatInput = {
@@ -10983,6 +11211,22 @@ export namespace Prisma {
     UserAuthInfo?: UserAuthInfoUncheckedUpdateOneWithoutUserNestedInput
     UserGamePlayer?: UserGamePlayerUncheckedUpdateManyWithoutUserNestedInput
     UserProfile?: UserProfileUncheckedUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserGamePlayerUpsertWithWhereUniqueWithoutStatInput = {
+    where: UserGamePlayerWhereUniqueInput
+    update: XOR<UserGamePlayerUpdateWithoutStatInput, UserGamePlayerUncheckedUpdateWithoutStatInput>
+    create: XOR<UserGamePlayerCreateWithoutStatInput, UserGamePlayerUncheckedCreateWithoutStatInput>
+  }
+
+  export type UserGamePlayerUpdateWithWhereUniqueWithoutStatInput = {
+    where: UserGamePlayerWhereUniqueInput
+    data: XOR<UserGamePlayerUpdateWithoutStatInput, UserGamePlayerUncheckedUpdateWithoutStatInput>
+  }
+
+  export type UserGamePlayerUpdateManyWithWhereWithoutStatInput = {
+    where: UserGamePlayerScalarWhereInput
+    data: XOR<UserGamePlayerUpdateManyMutationInput, UserGamePlayerUncheckedUpdateManyWithoutStatInput>
   }
 
   export type UserCreateWithoutUserProfileInput = {
@@ -11052,26 +11296,27 @@ export namespace Prisma {
     userId: string
     index: number
     result: $Enums.GameEndResult
-    winPlace?: number | null
-    winRoundNumber?: number | null
+    place: number
+    roundLeftNumber: number
     hasLost?: boolean
   }
 
   export type UserGamePlayerUpdateWithoutDurakGameInput = {
     index?: IntFieldUpdateOperationsInput | number
     result?: EnumGameEndResultFieldUpdateOperationsInput | $Enums.GameEndResult
-    winPlace?: NullableIntFieldUpdateOperationsInput | number | null
-    winRoundNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    place?: IntFieldUpdateOperationsInput | number
+    roundLeftNumber?: IntFieldUpdateOperationsInput | number
     hasLost?: BoolFieldUpdateOperationsInput | boolean
     User?: UserUpdateOneRequiredWithoutUserGamePlayerNestedInput
+    stat?: UserGameStatUpdateOneRequiredWithoutUserGamePlayerNestedInput
   }
 
   export type UserGamePlayerUncheckedUpdateWithoutDurakGameInput = {
     userId?: StringFieldUpdateOperationsInput | string
     index?: IntFieldUpdateOperationsInput | number
     result?: EnumGameEndResultFieldUpdateOperationsInput | $Enums.GameEndResult
-    winPlace?: NullableIntFieldUpdateOperationsInput | number | null
-    winRoundNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    place?: IntFieldUpdateOperationsInput | number
+    roundLeftNumber?: IntFieldUpdateOperationsInput | number
     hasLost?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -11079,8 +11324,8 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     index?: IntFieldUpdateOperationsInput | number
     result?: EnumGameEndResultFieldUpdateOperationsInput | $Enums.GameEndResult
-    winPlace?: NullableIntFieldUpdateOperationsInput | number | null
-    winRoundNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    place?: IntFieldUpdateOperationsInput | number
+    roundLeftNumber?: IntFieldUpdateOperationsInput | number
     hasLost?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -11088,26 +11333,27 @@ export namespace Prisma {
     durakGameNumber: number
     index: number
     result: $Enums.GameEndResult
-    winPlace?: number | null
-    winRoundNumber?: number | null
+    place: number
+    roundLeftNumber: number
     hasLost?: boolean
   }
 
   export type UserGamePlayerUpdateWithoutUserInput = {
     index?: IntFieldUpdateOperationsInput | number
     result?: EnumGameEndResultFieldUpdateOperationsInput | $Enums.GameEndResult
-    winPlace?: NullableIntFieldUpdateOperationsInput | number | null
-    winRoundNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    place?: IntFieldUpdateOperationsInput | number
+    roundLeftNumber?: IntFieldUpdateOperationsInput | number
     hasLost?: BoolFieldUpdateOperationsInput | boolean
     DurakGame?: DurakGameUpdateOneRequiredWithoutPlayersNestedInput
+    stat?: UserGameStatUpdateOneRequiredWithoutUserGamePlayerNestedInput
   }
 
   export type UserGamePlayerUncheckedUpdateWithoutUserInput = {
     durakGameNumber?: IntFieldUpdateOperationsInput | number
     index?: IntFieldUpdateOperationsInput | number
     result?: EnumGameEndResultFieldUpdateOperationsInput | $Enums.GameEndResult
-    winPlace?: NullableIntFieldUpdateOperationsInput | number | null
-    winRoundNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    place?: IntFieldUpdateOperationsInput | number
+    roundLeftNumber?: IntFieldUpdateOperationsInput | number
     hasLost?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -11115,8 +11361,45 @@ export namespace Prisma {
     durakGameNumber?: IntFieldUpdateOperationsInput | number
     index?: IntFieldUpdateOperationsInput | number
     result?: EnumGameEndResultFieldUpdateOperationsInput | $Enums.GameEndResult
-    winPlace?: NullableIntFieldUpdateOperationsInput | number | null
-    winRoundNumber?: NullableIntFieldUpdateOperationsInput | number | null
+    place?: IntFieldUpdateOperationsInput | number
+    roundLeftNumber?: IntFieldUpdateOperationsInput | number
+    hasLost?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type UserGamePlayerCreateManyStatInput = {
+    durakGameNumber: number
+    index: number
+    result: $Enums.GameEndResult
+    place: number
+    roundLeftNumber: number
+    hasLost?: boolean
+  }
+
+  export type UserGamePlayerUpdateWithoutStatInput = {
+    index?: IntFieldUpdateOperationsInput | number
+    result?: EnumGameEndResultFieldUpdateOperationsInput | $Enums.GameEndResult
+    place?: IntFieldUpdateOperationsInput | number
+    roundLeftNumber?: IntFieldUpdateOperationsInput | number
+    hasLost?: BoolFieldUpdateOperationsInput | boolean
+    DurakGame?: DurakGameUpdateOneRequiredWithoutPlayersNestedInput
+    User?: UserUpdateOneRequiredWithoutUserGamePlayerNestedInput
+  }
+
+  export type UserGamePlayerUncheckedUpdateWithoutStatInput = {
+    durakGameNumber?: IntFieldUpdateOperationsInput | number
+    index?: IntFieldUpdateOperationsInput | number
+    result?: EnumGameEndResultFieldUpdateOperationsInput | $Enums.GameEndResult
+    place?: IntFieldUpdateOperationsInput | number
+    roundLeftNumber?: IntFieldUpdateOperationsInput | number
+    hasLost?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type UserGamePlayerUncheckedUpdateManyWithoutStatInput = {
+    durakGameNumber?: IntFieldUpdateOperationsInput | number
+    index?: IntFieldUpdateOperationsInput | number
+    result?: EnumGameEndResultFieldUpdateOperationsInput | $Enums.GameEndResult
+    place?: IntFieldUpdateOperationsInput | number
+    roundLeftNumber?: IntFieldUpdateOperationsInput | number
     hasLost?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -11125,6 +11408,18 @@ export namespace Prisma {
   /**
    * Aliases for legacy arg types
    */
+    /**
+     * @deprecated Use DurakGameCountOutputTypeDefaultArgs instead
+     */
+    export type DurakGameCountOutputTypeArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = DurakGameCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use UserCountOutputTypeDefaultArgs instead
+     */
+    export type UserCountOutputTypeArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = UserCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use UserGameStatCountOutputTypeDefaultArgs instead
+     */
+    export type UserGameStatCountOutputTypeArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = UserGameStatCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use DurakGameDefaultArgs instead
      */
