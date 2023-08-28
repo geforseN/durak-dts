@@ -6,8 +6,8 @@
   "types": "index.d.ts",
   "scripts": {
     "test": "test",
-    "patch": "npm version patch && push",
-    "minor": "npm version minor && push",
+    "patch": "npm version patch && npx push",
+    "minor": "npm version minor && npx push",
     "push": "git push && npm publish"
   },
   "repository": {
