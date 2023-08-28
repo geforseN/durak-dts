@@ -1,3 +1,21 @@
+import type {
+  ConnectStatus,
+  DurakGame,
+  User,
+  UserGamePlayer,
+  UserProfile,
+  UserGameStat,
+} from "./generated/client/index";
+
+export type {
+  ConnectStatus,
+  DurakGame,
+  User,
+  UserGamePlayer,
+  UserProfile,
+  UserGameStat,
+};
+
 export const playerKinds: PlayerKind[] = ["Attacker", "Defender", "Player"];
 export function isPlayerKind(kind: string | PlayerKind): kind is PlayerKind {
   return playerKinds.includes(kind as PlayerKind);

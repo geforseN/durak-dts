@@ -8,15 +8,13 @@ import type {
   Card,
   GameState,
   NotificationAlert,
-} from "./index";
-
-import type {
   ConnectStatus,
   DurakGame,
   User,
   UserGamePlayer,
   UserProfile,
-} from "./generated/client";
+  UserGameStat,
+} from "./index";
 
 export namespace DurakGameSocket {
   export type ClientToServerEvents = {
