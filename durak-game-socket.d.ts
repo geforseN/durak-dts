@@ -8,12 +8,8 @@ import type {
   Card,
   GameState,
   NotificationAlert,
-  ConnectStatus,
-  DurakGame,
   User,
-  UserGamePlayer,
   UserProfile,
-  UserGameStat,
 } from "./index";
 
 export namespace DurakGameSocket {
