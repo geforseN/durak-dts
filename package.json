@@ -4,6 +4,7 @@
   "description": "Durak Game TypeScript types for Node.js server and JavaScript client ",
   "main": "index.js",
   "types": "index.d.ts",
+  "type": "module",
   "scripts": {
     "test": "test",
     "patch": "npm version patch && git push && npm publish",
