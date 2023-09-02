@@ -1,3 +1,5 @@
+import type { ConnectStatus, DurakGame, User, UserGamePlayer, UserProfile, UserGameStat } from "./generated/client/index";
+export type { ConnectStatus, DurakGame, User, UserGamePlayer, UserProfile, UserGameStat, };
 export declare const playerKinds: PlayerKind[];
 export declare function isPlayerKind(kind: string | PlayerKind): kind is PlayerKind;
 export { DurakGameSocket } from "./durak-game-socket";
@@ -19,7 +21,7 @@ export type PlayerInfo = {
     };
 };
 export type PlayerKind = "Defender" | "Attacker" | "Player";
-type BasePlayer = {
+export type BasePlayer = {
     info: PlayerInfo;
     kind: PlayerKind;
     id: string;

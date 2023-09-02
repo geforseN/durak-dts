@@ -1,4 +1,8 @@
-export const playerKinds = ["Attacker", "Defender", "Player"];
-export function isPlayerKind(kind) {
-    return playerKinds.includes(kind);
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.isPlayerKind = exports.playerKinds = void 0;
+exports.playerKinds = ["Attacker", "Defender", "Player"];
+function isPlayerKind(kind) {
+    return exports.playerKinds.includes(kind);
 }
+exports.isPlayerKind = isPlayerKind;
