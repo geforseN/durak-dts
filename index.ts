@@ -16,7 +16,17 @@ export type {
   UserGameStat,
 };
 
-export const playerKinds: PlayerKind[] = ["Attacker", "Defender", "Player"];
+export const playerKinds = [
+  "Attacker",
+  "Defender",
+  "Player",
+  "AllowedAttacker",
+  "AllowedDefender",
+  "SurrenderedDefender",
+] as const;
+
+export type PlayerKind = (typeof playerKinds)[number];
+
 export function isPlayerKind(kind: string | PlayerKind): kind is PlayerKind {
   return playerKinds.includes(kind as PlayerKind);
 }
@@ -43,8 +53,6 @@ export type PlayerInfo = {
     connectStatus: "ONLINE" | "AWAY" | "OFFLINE";
   };
 };
-
-export type PlayerKind = "Defender" | "Attacker" | "Player";
 
 export type BasePlayer = {
   info: PlayerInfo;
