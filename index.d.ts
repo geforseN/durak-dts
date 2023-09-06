@@ -1,6 +1,7 @@
 import type { ConnectStatus, DurakGame, User, UserGamePlayer, UserProfile, UserGameStat } from "./generated/client/index";
 export type { ConnectStatus, DurakGame, User, UserGamePlayer, UserProfile, UserGameStat, };
-export declare const playerKinds: PlayerKind[];
+export declare const playerKinds: readonly ["Attacker", "Defender", "Player", "AllowedAttacker", "AllowedDefender", "SurrenderedDefender"];
+export type PlayerKind = (typeof playerKinds)[number];
 export declare function isPlayerKind(kind: string | PlayerKind): kind is PlayerKind;
 export { DurakGameSocket } from "./durak-game-socket";
 export type NotificationAlert = {
@@ -20,7 +21,6 @@ export type PlayerInfo = {
         connectStatus: "ONLINE" | "AWAY" | "OFFLINE";
     };
 };
-export type PlayerKind = "Defender" | "Attacker" | "Player";
 export type BasePlayer = {
     info: PlayerInfo;
     kind: PlayerKind;
