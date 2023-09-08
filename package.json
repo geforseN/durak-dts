@@ -6,8 +6,8 @@
   "types": "index.d.ts",
   "scripts": {
     "test": "test",
-    "patch": "npx tsc && git commit --all && npm version patch && git push && npm publish",
-    "minor": "npx tsc && git commit --all && npm version minor && git push && npm publish"
+    "patch": "tsc && git commit -a && npm version patch && git push && npm publish",
+    "minor": "tsc && git commit -a && npm version minor && git push && npm publish"
   },
   "repository": {
     "type": "git",
