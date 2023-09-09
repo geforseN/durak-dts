@@ -60,13 +60,13 @@ export type BasePlayer =
       info: PlayerInfo;
       kind: PlayerKind;
       id: string;
-      isAllowedToMove: false;
+      isAllowedToMove: boolean;
     }
   | {
       info: PlayerInfo;
       kind: AllowedPlayerKind;
       id: string;
-      isAllowedToMove: true;
+      isAllowedToMove: boolean;
       whenMayBecomeDisallowed: { UTC: number };
     };
 
@@ -134,7 +134,7 @@ export type GameState = {
       name: string;
     };
   };
-  gameStatus: "starts" | "started" | "ended";
+  status: "starts" | "started" | "ended";
   desk: {
     slots: DeskSlot[];
   };
