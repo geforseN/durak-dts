@@ -130,9 +130,6 @@ export type GameState = {
   };
   round: {
     number: number;
-    currentMove: {
-      name: string;
-    };
   };
   status: "starts" | "started" | "ended";
   desk: {
