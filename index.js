@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.isPlayerKind = exports.playerKinds = void 0;
+const allowedPlayerKinds = ["AllowedAttacker", "AllowedDefender"];
 exports.playerKinds = [
     "Attacker",
     "Defender",
     "Player",
-    "AllowedAttacker",
-    "AllowedDefender",
+    ...allowedPlayerKinds,
     "SurrenderedDefender",
 ];
 function isPlayerKind(kind) {

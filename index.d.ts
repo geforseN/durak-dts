@@ -1,5 +1,7 @@
 import type { ConnectStatus, DurakGame, User, UserGamePlayer, UserProfile, UserGameStat } from "./generated/client/index";
 export type { ConnectStatus, DurakGame, User, UserGamePlayer, UserProfile, UserGameStat, };
+declare const allowedPlayerKinds: readonly ["AllowedAttacker", "AllowedDefender"];
+export type AllowedPlayerKind = (typeof allowedPlayerKinds)[number];
 export declare const playerKinds: readonly ["Attacker", "Defender", "Player", "AllowedAttacker", "AllowedDefender", "SurrenderedDefender"];
 export type PlayerKind = (typeof playerKinds)[number];
 export declare function isPlayerKind(kind: string | PlayerKind): kind is PlayerKind;
@@ -25,11 +27,15 @@ export type BasePlayer = {
     info: PlayerInfo;
     kind: PlayerKind;
     id: string;
-    isAllowedToMove: boolean;
-};
-export type Defender = BasePlayer & {
-    kind: "Defender";
-    isGaveUp: boolean;
+    isAllowedToMove: false;
+} | {
+    info: PlayerInfo;
+    kind: AllowedPlayerKind;
+    id: string;
+    isAllowedToMove: true;
+    whenMayBecomeDisallowed: {
+        UTC: number;
+    };
 };
 export type Self = {
     cards: Card[];
@@ -75,15 +81,9 @@ export type GameState = {
         number: number;
         currentMove: {
             name: string;
-            allowedPlayer: {
-                id: string;
-            };
-            endTime: {
-                UTC: number;
-            };
         };
     };
-    isGameEnded: boolean;
+    gameStatus: "starts" | "started" | "ended";
     desk: {
         slots: DeskSlot[];
     };

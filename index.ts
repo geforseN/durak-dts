@@ -16,15 +16,16 @@ export type {
   UserGameStat,
 };
 
+const allowedPlayerKinds = ["AllowedAttacker", "AllowedDefender"] as const;
+export type AllowedPlayerKind = (typeof allowedPlayerKinds)[number];
+
 export const playerKinds = [
   "Attacker",
   "Defender",
   "Player",
-  "AllowedAttacker",
-  "AllowedDefender",
+  ...allowedPlayerKinds,
   "SurrenderedDefender",
 ] as const;
-
 export type PlayerKind = (typeof playerKinds)[number];
 
 export function isPlayerKind(kind: string | PlayerKind): kind is PlayerKind {
@@ -54,17 +55,20 @@ export type PlayerInfo = {
   };
 };
 
-export type BasePlayer = {
-  info: PlayerInfo;
-  kind: PlayerKind;
-  id: string;
-  isAllowedToMove: boolean;
-};
-
-export type Defender = BasePlayer & {
-  kind: "Defender";
-  isGaveUp: boolean;
-};
+export type BasePlayer =
+  | {
+      info: PlayerInfo;
+      kind: PlayerKind;
+      id: string;
+      isAllowedToMove: false;
+    }
+  | {
+      info: PlayerInfo;
+      kind: AllowedPlayerKind;
+      id: string;
+      isAllowedToMove: true;
+      whenMayBecomeDisallowed: { UTC: number };
+    };
 
 export type Self = {
   cards: Card[];
@@ -78,6 +82,7 @@ export type Card = {
   rank: Rank;
   suit: Suit;
 };
+
 export type Rank =
   | "2"
   | "3"
@@ -92,6 +97,7 @@ export type Rank =
   | "Q"
   | "K"
   | "A";
+
 export type Suit = "♠" | "♦" | "♥" | "♣";
 
 export type GameType = "basic" | "perevodnoy";
@@ -126,15 +132,9 @@ export type GameState = {
     number: number;
     currentMove: {
       name: string;
-      allowedPlayer: {
-        id: string;
-      };
-      endTime: {
-        UTC: number;
-      };
     };
   };
-  isGameEnded: boolean;
+  gameStatus: "starts" | "started" | "ended";
   desk: {
     slots: DeskSlot[];
   };
