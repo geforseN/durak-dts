@@ -46,7 +46,7 @@ export namespace DurakGameSocket {
     "desk::receivedCard": (payload: {
       card: Card;
       slot: { index: number };
-      source: { id: Player["id"] };
+      performer: { id: Player["id"] };
     }) => void;
   };
 
@@ -111,6 +111,20 @@ export namespace DurakGameSocket {
     "player::leftGame": (
       payload: { player: { id: Player["id"] } } | void
     ) => void;
+    "allowedPlayer::defaultBehavior": (payload: {
+        defaultBehavior: {
+          callTime: {
+            UTC: number,
+          },
+        },
+      } | {
+        allowedPlayer: { id: Player['id'] },
+        defaultBehavior: {
+          callTime: {
+            UTC: number,
+          },
+        },
+      }) => void
   };
 
   type RoundServerToClientEvents = {
@@ -168,3 +182,20 @@ export namespace DurakGameSocket {
     DurakGameSocket.SocketData
   >;
 }
+.emit("allowedPlayer::defaultBehavior", {
+        defaultBehavior: {
+          callTime: {
+            UTC: this.defaultBehavior.callTime.UTC,
+          },
+        },
+      });
+    this.game.info.namespace
+      .except(this.id)
+      .emit("allowedPlayer::defaultBehavior", {
+        allowedPlayer: { id: this.id },
+        defaultBehavior: {
+          callTime: {
+            UTC: this.defaultBehavior.callTime.UTC,
+          },
+        },
+      });
