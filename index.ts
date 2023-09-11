@@ -70,14 +70,6 @@ export type BasePlayer =
       whenMayBecomeDisallowed: { UTC: number };
     };
 
-export type Self = {
-  cards: Card[];
-} & BasePlayer;
-
-export type Enemy = {
-  cardCount: number;
-} & BasePlayer;
-
 export type Card = {
   rank: Rank;
   suit: Suit;
@@ -123,8 +115,8 @@ export type GameSettings = {
 };
 
 export type GameState = {
-  self: Self;
-  enemies: Enemy[];
+  self: BasePlayer & { cards: Card[] };
+  enemies: (BasePlayer & { cardCount: number })[];
   discard: {
     isEmpty: boolean;
   };
