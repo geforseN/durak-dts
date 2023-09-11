@@ -182,20 +182,3 @@ export namespace DurakGameSocket {
     DurakGameSocket.SocketData
   >;
 }
-.emit("allowedPlayer::defaultBehavior", {
-        defaultBehavior: {
-          callTime: {
-            UTC: this.defaultBehavior.callTime.UTC,
-          },
-        },
-      });
-    this.game.info.namespace
-      .except(this.id)
-      .emit("allowedPlayer::defaultBehavior", {
-        allowedPlayer: { id: this.id },
-        defaultBehavior: {
-          callTime: {
-            UTC: this.defaultBehavior.callTime.UTC,
-          },
-        },
-      });
