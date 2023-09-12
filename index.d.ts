@@ -41,8 +41,12 @@ export type Card = {
     rank: Rank;
     suit: Suit;
 };
-export type Rank = "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "J" | "Q" | "K" | "A";
-export type Suit = "♠" | "♦" | "♥" | "♣";
+export declare const ranks: readonly ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
+export type Rank = (typeof ranks)[number];
+export declare const suits: readonly ["♠", "♦", "♥", "♣"];
+export type Suit = (typeof suits)[number];
+export declare const powers: Record<Rank, number>;
+export type Power = (typeof powers)[keyof typeof powers];
 export type GameType = "basic" | "perevodnoy";
 export type CardCount = 24 | 36 | 52;
 export type UserCount = 2 | 3 | 4 | 5 | 6;
@@ -65,13 +69,17 @@ export type GameSettings = {
         slotCount: AllowedMissingCardCount;
     };
 };
+export type Self = BasePlayer & {
+    cards: Card[];
+};
+export type Enemy = BasePlayer & {
+    cardCount: number;
+};
 export type GameState = {
     self: BasePlayer & {
         cards: Card[];
     };
-    enemies: (BasePlayer & {
-        cardCount: number;
-    })[];
+    enemies: Enemy[];
     discard: {
         isEmpty: boolean;
     };
