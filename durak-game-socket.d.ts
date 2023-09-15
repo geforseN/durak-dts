@@ -64,10 +64,12 @@ export namespace DurakGameSocket {
   type MoveServerToClientEvents = {
     "move::new": (payload: {
       move: {
+        performer?: { id: string };
         name: string;
-        allowedPlayer: { id: string };
-        endTime: { UTC: number };
-        timeToMove?: number;
+        insert?: {
+          card: Card;
+          slot: { index: number };
+        };
       };
     }) => void;
   };
@@ -111,35 +113,28 @@ export namespace DurakGameSocket {
     "player::leftGame": (
       payload: { player: { id: Player["id"] } } | void
     ) => void;
-    "allowedPlayer::defaultBehavior": (payload: {
-        defaultBehavior: {
-          callTime: {
-            UTC: number,
-          },
-        },
-      } | {
-        allowedPlayer: { id: Player['id'] },
-        defaultBehavior: {
-          callTime: {
-            UTC: number,
-          },
-        },
-      }) => void
+    "allowedPlayer::defaultBehavior": (
+      payload:
+        | {
+            defaultBehavior: {
+              callTime: {
+                UTC: number;
+              };
+            };
+          }
+        | {
+            allowedPlayer: { id: Player["id"] };
+            defaultBehavior: {
+              callTime: {
+                UTC: number;
+              };
+            };
+          }
+    ) => void;
   };
 
   type RoundServerToClientEvents = {
-    "round::new": (payload: { roundNumber: number }) => void;
-    "round::becameEnded": (payload: {
-      round: {
-        number: number;
-        defender: {
-          // NOTE: frontend should know who is defender
-          // so data about defender id can be omitted
-          id?: Player["id"];
-          isSuccessfullyDefended: boolean;
-        };
-      };
-    }) => void;
+    "round::new": (payload: { round: { number: number } }) => void;
   };
 
   type TalonServerToClientEvents = {
