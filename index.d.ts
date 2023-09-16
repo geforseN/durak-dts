@@ -41,6 +41,7 @@ export type Card = {
     rank: Rank;
     suit: Suit;
 };
+export type CardDTO = Card;
 export declare const ranks: readonly ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
 export type Rank = (typeof ranks)[number];
 export declare const suits: readonly ["♠", "♦", "♥", "♣"];

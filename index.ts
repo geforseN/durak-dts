@@ -74,6 +74,7 @@ export type Card = {
   rank: Rank;
   suit: Suit;
 };
+export type CardDTO = Card;
 
 export const ranks = [
   "2",
