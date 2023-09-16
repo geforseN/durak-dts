@@ -47,19 +47,24 @@ export declare const suits: readonly ["♠", "♦", "♥", "♣"];
 export type Suit = (typeof suits)[number];
 export declare const powers: Record<Rank, number>;
 export type Power = (typeof powers)[keyof typeof powers];
-export type GameType = "basic" | "perevodnoy";
-export type CardCount = 24 | 36 | 52;
-export type UserCount = 2 | 3 | 4 | 5 | 6;
+export type DurakGameType = "basic" | "perevodnoy";
+export type TalonCardCount = 24 | 36 | 52;
+export type PlayerCount = 2 | 3 | 4 | 5 | 6;
 export type AllowedMissingCardCount = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 export type DeskSlot = {
     attackCard?: Card;
     defendCard?: Card;
 };
 export type GameSettings = {
-    userCount: UserCount;
-    gameType: GameType;
-    cardCount: CardCount;
-    moveTime: number;
+    players: {
+        count: PlayerCount;
+        moveTime: number;
+    };
+    type: DurakGameType;
+    talon: {
+        count: TalonCardCount;
+        trumpCard?: Card;
+    };
     initialDistribution: {
         finalCardCount: AllowedMissingCardCount;
         cardCountPerIteration: AllowedMissingCardCount;
