@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.powers = exports.suits = exports.ranks = exports.isPlayerKind = exports.playerKinds = void 0;
+exports.defaultInitialGameSettings = exports.allowedMissingCardCount = exports.allowedPlayerCount = exports.allowedTalonCardCount = exports.allowedDurakGameTypes = exports.powers = exports.suits = exports.ranks = exports.isPlayerKind = exports.playerKinds = void 0;
 const allowedPlayerKinds = ["AllowedAttacker", "AllowedDefender"];
 exports.playerKinds = [
     "Attacker",
@@ -43,4 +43,14 @@ exports.powers = {
     Q: 11,
     K: 12,
     A: 13,
+};
+exports.allowedDurakGameTypes = ["basic", "perevodnoy"];
+exports.allowedTalonCardCount = [24, 36, 52];
+exports.allowedPlayerCount = [2, 3, 4, 5, 6];
+exports.allowedMissingCardCount = [0, 1, 2, 3, 4, 5, 6];
+exports.defaultInitialGameSettings = {
+    userCount: 2,
+    cardCount: 36,
+    gameType: "basic",
+    moveTime: 30000,
 };

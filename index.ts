@@ -113,12 +113,48 @@ export const powers: Record<Rank, number> = {
 } as const;
 export type Power = (typeof powers)[keyof typeof powers];
 
-export type DurakGameType = "basic" | "perevodnoy";
-export type TalonCardCount = 24 | 36 | 52;
-export type PlayerCount = 2 | 3 | 4 | 5 | 6;
-export type AllowedMissingCardCount = 0 | 1 | 2 | 3 | 4 | 5 | 6;
+export const allowedDurakGameTypes = ["basic", "perevodnoy"] as const;
+export type DurakGameType = (typeof allowedDurakGameTypes)[number];
 
-export type DeskSlot = { attackCard?: Card; defendCard?: Card };
+export const allowedTalonCardCount = [24, 36, 52] as const;
+export type TalonCardCount = (typeof allowedTalonCardCount)[number];
+
+export const allowedPlayerCount = [2, 3, 4, 5, 6] as const;
+export type PlayerCount = (typeof allowedPlayerCount)[number];
+
+export const allowedMissingCardCount = [0, 1, 2, 3, 4, 5, 6] as const;
+export type AllowedMissingCardCount = (typeof allowedMissingCardCount)[number];
+
+export type DeskSlot = { 
+  attackCard?: Card;
+   defendCard?: Card
+};
+export type EmptyDeskSlot = {
+  attackCard: undefined;
+  defendCard: undefined;
+};
+export type AttackedDeskSlot = {
+  attackCard: Card;
+  defendCard: undefined;
+};
+export type DefendedDeskSlot = {
+  attackCard: Card;
+  defendCard: Card;
+};
+
+type InitialGameSettings = {
+  userCount: PlayerCount;
+  cardCount: TalonCardCount;
+  gameType: DurakGameType;
+  moveTime: number;
+};
+
+export const defaultInitialGameSettings: InitialGameSettings = {
+  userCount: 2,
+  cardCount: 36,
+  gameType: "basic",
+  moveTime: 30_000,
+};
 
 export type GameSettings = {
   players: {
