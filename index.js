@@ -49,8 +49,8 @@ exports.allowedTalonCardCount = [24, 36, 52];
 exports.allowedPlayerCount = [2, 3, 4, 5, 6];
 exports.allowedMissingCardCount = [0, 1, 2, 3, 4, 5, 6];
 exports.defaultInitialGameSettings = {
-    userCount: 2,
-    cardCount: 36,
+    playerCount: 2,
+    talonCardCount: 36,
     gameType: "basic",
     moveTime: 30000,
 };

@@ -143,15 +143,15 @@ export type DefendedDeskSlot = {
 };
 
 export type InitialGameSettings = {
-  userCount: PlayerCount;
-  cardCount: TalonCardCount;
+  playerCount: PlayerCount;
+  talonCardCount: TalonCardCount;
   gameType: DurakGameType;
   moveTime: number;
 };
 
 export const defaultInitialGameSettings: InitialGameSettings = {
-  userCount: 2,
-  cardCount: 36,
+  playerCount: 2,
+  talonCardCount: 36,
   gameType: "basic",
   moveTime: 30_000,
 };

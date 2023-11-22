@@ -73,8 +73,8 @@ export type DefendedDeskSlot = {
     defendCard: Card;
 };
 export type InitialGameSettings = {
-    userCount: PlayerCount;
-    cardCount: TalonCardCount;
+    playerCount: PlayerCount;
+    talonCardCount: TalonCardCount;
     gameType: DurakGameType;
     moveTime: number;
 };
