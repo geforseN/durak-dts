@@ -142,7 +142,7 @@ export type DefendedDeskSlot = {
   defendCard: Card;
 };
 
-type InitialGameSettings = {
+export type InitialGameSettings = {
   userCount: PlayerCount;
   cardCount: TalonCardCount;
   gameType: DurakGameType;
